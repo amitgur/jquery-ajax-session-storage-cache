@@ -21,13 +21,13 @@
         cache_value;
     
     this.ajax_options = $.extend({}, options.ajax_options, { context: this, success: [ options.ajax_options.success, this.cacheResponse ] });
-    this.debug = !!global_options.debug;
-    
+    this.debug = options.debug !! global_options.debug;
+    this.key = namespace + "-" + options.key;
+    this.minutes_to_expiration = options.minutes_to_expiration;
+      
     if (skip_cache) {
       this.performAjax();
     } else {
-      this.key = namespace + "-" + options.key;
-      this.minutes_to_expiration = options.minutes_to_expiration;
       
       cache_value = this.getSessionStorageCache(this.key);
       
